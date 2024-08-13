@@ -1,1 +1,1 @@
-# dev-k8s-flux
+Пример для канала https://t.me/DevOpsologist
