@@ -1,0 +1,34 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+    name: app-example
+    namespace: app-example
+spec:
+    interval: 1m0s
+    url: https://gitlab.example.com/api/v4/projects/1/packages/helm/stable
+    secretRef:
+        name: helm-pull
+---
+apiVersion: v1
+kind: Secret
+metadata:
+    name: helm-pull
+    namespace: app-example
+stringData:
+    username: "helm"
+    password: "very-strong-pass"
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+    name: app-example
+    namespace: app-example
+spec:
+    chart:
+        spec:
+            chart: app-example
+            sourceRef:
+                kind: HelmRepository
+                name: app-example
+            version: '*'
+    interval: 1m0s

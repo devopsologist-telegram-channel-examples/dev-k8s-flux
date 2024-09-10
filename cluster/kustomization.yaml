@@ -3,4 +3,5 @@ kind: Kustomization
 resources:
     - 01-metallb.yaml
     - 02-ingress-nginx.yaml
+    - 03-app.yaml
     - ./flux-system
