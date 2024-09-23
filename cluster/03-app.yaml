@@ -4,6 +4,10 @@ metadata:
     name: app-example
     namespace: flux-system
 spec:
+    decryption:
+        provider: sops
+        secretRef:
+            name: sops-gpg
     interval: 1m0s
     path: ./components/app-example
     prune: true

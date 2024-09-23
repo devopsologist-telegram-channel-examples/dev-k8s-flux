@@ -9,15 +9,6 @@ spec:
     secretRef:
         name: helm-pull
 ---
-apiVersion: v1
-kind: Secret
-metadata:
-    name: helm-pull
-    namespace: app-example
-stringData:
-    username: "helm"
-    password: "very-strong-pass"
----
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
