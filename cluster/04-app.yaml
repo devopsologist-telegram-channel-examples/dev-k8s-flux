@@ -9,6 +9,8 @@ spec:
         secretRef:
             name: sops-gpg
     interval: 1m0s
+    dependsOn:
+        - name: ingress-nginx
     path: ./components/app-example
     prune: true
     sourceRef:
