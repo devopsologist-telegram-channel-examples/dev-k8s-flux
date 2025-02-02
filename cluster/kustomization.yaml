@@ -4,5 +4,7 @@ resources:
     - 01-metallb-install.yaml
     - 02-metallb-config.yaml
     - 03-ingress-nginx.yaml
-    - 04-app.yaml
+    - 04-cert-manager.yaml
+    - 05-letsencrypt.yaml
+    - 06-app.yaml
     - ./flux-system
