@@ -6,5 +6,6 @@ resources:
     - 03-ingress-nginx.yaml
     - 04-cert-manager.yaml
     - 05-letsencrypt.yaml
-    - 06-app.yaml
+    - 06-local-path-provisioner.yaml
+    - 07-app.yaml
     - ./flux-system
