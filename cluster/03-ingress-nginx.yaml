@@ -9,6 +9,7 @@ spec:
         - name: metallb-config
     path: ./components/ingress-nginx
     prune: true
+    wait: true
     sourceRef:
         kind: GitRepository
         name: flux-system

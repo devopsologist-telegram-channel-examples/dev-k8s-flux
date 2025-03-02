@@ -9,6 +9,7 @@ spec:
     - name: ingress-nginx
   path: ./components/cert-manager
   prune: true
+  wait: true
   sourceRef:
     kind: GitRepository
     name: flux-system
