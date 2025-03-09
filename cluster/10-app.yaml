@@ -10,7 +10,7 @@ spec:
             name: sops-gpg
     interval: 1m0s
     dependsOn:
-        - name: local-path-provisioner
+        - name: postgres
     path: ./components/app-example
     prune: true
     wait: true

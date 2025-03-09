@@ -1,0 +1,15 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: postgres-operator
+  namespace: flux-system
+spec:
+  interval: 1m0s
+  dependsOn:
+    - name: app-example-namespace
+  wait: true
+  path: ./components/postgres-operator
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
