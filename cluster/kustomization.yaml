@@ -11,4 +11,5 @@ resources:
     - 08-postgres-operator.yaml
     - 09-postgres.yaml
     - 10-app.yaml
+    - 11-loki.yaml
     - ./flux-system
