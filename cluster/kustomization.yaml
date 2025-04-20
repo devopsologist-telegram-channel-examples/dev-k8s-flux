@@ -12,5 +12,5 @@ resources:
     - 09-postgres.yaml
     - 10-app.yaml
     - 11-loki.yaml
-    - 12-promtail.yaml
+    - 12-fluentbit.yaml
     - ./flux-system

@@ -1,0 +1,48 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: fluent
+  namespace: loki
+spec:
+  interval: 1m0s
+  url: https://fluent.github.io/helm-charts
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: fluentbit
+  namespace: loki
+spec:
+  chart:
+    spec:
+      chart: fluent-bit
+      sourceRef:
+        kind: HelmRepository
+        name: fluent
+      version: '0.48.10'
+  interval: 1m0s
+  values:
+    resources:
+      limits:
+        cpu: 200m
+        memory: 256Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
+    tolerations:
+      - key: node-role.kubernetes.io/master
+        operator: Exists
+        effect: NoSchedule
+      - key: node-role.kubernetes.io/control-plane
+        operator: Exists
+        effect: NoSchedule
+    config:
+      outputs: |
+        [OUTPUT]
+            Name loki
+            Match *
+            Host loki.loki.svc
+            Port 3100
+            Retry_Limit False
+            Labels namespace=$kubernetes['namespace_name'], node=$kubernetes['host'], pod=$kubernetes['pod_name'], container=$kubernetes['container_name'] 
+            Auto_kubernetes_labels On
