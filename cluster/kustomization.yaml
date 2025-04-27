@@ -13,4 +13,5 @@ resources:
     - 10-app.yaml
     - 11-loki.yaml
     - 12-fluentbit.yaml
+    - 13-grafana.yaml
     - ./flux-system

@@ -1,0 +1,53 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: grafana
+  namespace: grafana
+spec:
+  interval: 1m0s
+  url: https://grafana.github.io/helm-charts
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: grafana
+  namespace: grafana
+spec:
+  chart:
+    spec:
+      chart: grafana
+      sourceRef:
+        kind: HelmRepository
+        name: grafana
+      version: '8.12.1'
+  interval: 1m0s
+  values:
+    namespaceOverride: grafana
+    persistence:
+      enabled: true
+      storageClassName: local-path
+    envValueFrom:
+      GF_SECURITY_ADMIN_USER:
+          secretKeyRef:
+            name: grafana-admin-password
+            key: GF_SECURITY_ADMIN_USER
+      GF_SECURITY_ADMIN_PASSWORD:
+          secretKeyRef:
+            name: grafana-admin-password
+            key: GF_SECURITY_ADMIN_PASSWORD
+    datasources:
+      datasources.yaml:
+        apiVersion: 1
+        datasources:
+          - name: loki
+            type: loki
+            access: proxy
+            orgId: 1
+            url: http://loki.loki.svc:3100
+            isDefault: false
+            editable: false
+    grafana.ini:
+      log:
+        mode: console
+      log.console:
+        format: json
