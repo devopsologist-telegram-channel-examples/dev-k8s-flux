@@ -1,0 +1,19 @@
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
+metadata:
+  name: prompp
+  namespace: monitoring
+spec:
+  image: prompp/prompp:2.53.2-0.2.2  # Replace Prometheus with Deckhouse Prom++
+  securityContext:
+    fsGroup: 64535
+    runAsGroup: 64535
+    runAsNonRoot: true
+    runAsUser: 64535
+  storage:
+    volumeClaimTemplate:
+      spec:
+        storageClassName: local-path
+        resources:
+          requests:
+            storage: 5Gi
