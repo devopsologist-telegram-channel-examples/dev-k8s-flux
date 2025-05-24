@@ -29,3 +29,6 @@ spec:
       enabled: false
     prometheus:
       enabled: false
+    kube-state-metrics:
+      metricLabelsAllowlist:
+        - daemonsets=[*]

@@ -28,13 +28,13 @@ spec:
       storageClassName: local-path
     envValueFrom:
       GF_SECURITY_ADMIN_USER:
-          secretKeyRef:
-            name: grafana-admin-password
-            key: GF_SECURITY_ADMIN_USER
+        secretKeyRef:
+          name: grafana-admin-password
+          key: GF_SECURITY_ADMIN_USER
       GF_SECURITY_ADMIN_PASSWORD:
-          secretKeyRef:
-            name: grafana-admin-password
-            key: GF_SECURITY_ADMIN_PASSWORD
+        secretKeyRef:
+          name: grafana-admin-password
+          key: GF_SECURITY_ADMIN_PASSWORD
     datasources:
       datasources.yaml:
         apiVersion: 1
@@ -46,6 +46,34 @@ spec:
             url: http://loki.loki.svc:3100
             isDefault: false
             editable: false
+          - name: prompp
+            uid: prompp
+            type: prometheus
+            access: proxy
+            orgId: 1
+            url: http://prometheus-operated.monitoring:9090
+            isDefault: true
+            editable: false
+    dashboardProviders:
+      dashboardproviders.yaml:
+        apiVersion: 1
+        providers:
+          - name: 'default'
+            orgId: 1
+            folder: ''
+            type: file
+            disableDeletion: true
+            editable: false
+            options:
+              path: /var/lib/grafana/dashboards/default
+    dashboards:
+      default:
+        node-exporter:
+          gnetId: 1860
+          revision: 37
+          datasource: prompp
+        k8s:
+          url: https://raw.githubusercontent.com/BigKAA/youtube/refs/heads/master/monitoring/video06/dashboards/k8s.json
     grafana.ini:
       log:
         mode: console
