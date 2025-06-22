@@ -6,6 +6,8 @@ metadata:
 spec:
     interval: 1m0s
     path: ./components/metallb-install
+    dependsOn:
+        - name: prometheus-operator-crds
     prune: true
     wait: true
     sourceRef:

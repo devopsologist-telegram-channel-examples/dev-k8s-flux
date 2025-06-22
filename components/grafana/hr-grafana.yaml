@@ -66,6 +66,14 @@ spec:
             editable: false
             options:
               path: /var/lib/grafana/dashboards/default
+          - name: 'configmap'
+            orgId: 1
+            folder: ''
+            type: file
+            disableDeletion: true
+            editable: false
+            options:
+              path: /var/lib/grafana/dashboards/configmap
     dashboards:
       default:
         node-exporter:
@@ -74,6 +82,8 @@ spec:
           datasource: prompp
         k8s:
           url: https://raw.githubusercontent.com/BigKAA/youtube/refs/heads/master/monitoring/video06/dashboards/k8s.json
+      dashboardsConfigMaps:
+        configmap: grafana-dashboards
     grafana.ini:
       log:
         mode: console
