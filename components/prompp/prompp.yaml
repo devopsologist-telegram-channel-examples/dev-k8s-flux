@@ -4,7 +4,7 @@ metadata:
   name: prompp
   namespace: monitoring
 spec:
-  image: prompp/prompp:2.53.2-0.2.5  # Replace Prometheus with Deckhouse Prom++
+  image: prompp/prompp:2.53.2-0.2.6  # Replace Prometheus with Deckhouse Prom++
   securityContext:
     fsGroup: 64535
     runAsGroup: 64535
@@ -14,6 +14,13 @@ spec:
   serviceMonitorNamespaceSelector: { }
   serviceMonitorSelector: { }
   podMonitorSelector: { }
+  ruleSelector: { }
+  ruleNamespaceSelector: { }
+  alerting:
+    alertmanagers:
+      - namespace: monitoring
+        name: alertmanager-operated
+        port: web
   storage:
     volumeClaimTemplate:
       spec:

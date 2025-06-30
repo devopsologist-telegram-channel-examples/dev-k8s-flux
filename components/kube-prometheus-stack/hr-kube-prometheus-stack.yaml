@@ -32,3 +32,5 @@ spec:
     kube-state-metrics:
       metricLabelsAllowlist:
         - daemonsets=[*]
+    defaultRules:
+      create: false

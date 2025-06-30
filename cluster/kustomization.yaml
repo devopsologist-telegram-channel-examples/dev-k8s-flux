@@ -17,4 +17,5 @@ resources:
   - 13-grafana.yaml
   - 14-kube-prometheus-stack.yaml
   - 15-prompp.yaml
+  - 16-alertmanager.yaml
   - ./flux-system

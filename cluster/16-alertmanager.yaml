@@ -1,0 +1,19 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: alertmanager
+  namespace: flux-system
+spec:
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-gpg
+  interval: 1m0s
+  dependsOn:
+    - name: prompp
+  wait: true
+  path: ./components/alertmanager
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
